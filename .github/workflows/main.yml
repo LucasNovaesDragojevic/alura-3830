@@ -27,8 +27,10 @@ jobs:
       run: docker compose up -d
     - name: Executa testes unitários
       run: mvn -B verify
-    - name: Análise Estática
+    - name: Jacoco
+      run: mvn jacoco:prepare-agent verify
+    - name: Sonar Cloud
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=LucasNovaesDragojevic_alura-3830
+      run: mvn sonar:sonar -Dsonar.projectKey=LucasNovaesDragojevic_alura-3830
