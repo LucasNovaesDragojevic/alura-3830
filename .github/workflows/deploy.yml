@@ -22,7 +22,10 @@ jobs:
         sudo chmod +x /usr/local/bin/docker-compose
         docker-compose --version
     - name: Roda Docker Compose
-      run: docker-compose up -d
+      run: | 
+        docker-compose up -d
+        docker image list
+        docker container list --all
     - name: Deploy EC2
       env: 
         PRIVATE_KEY: ${{ secrets.EC2_PRIVATE_KEY }}
